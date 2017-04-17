@@ -1,0 +1,8 @@
+# Todo
+
+Content
+Fix CSS and UI
+Navigation
+SEO
+Upload
+Ping + Linkg
