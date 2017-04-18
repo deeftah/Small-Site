@@ -1,0 +1,24 @@
+RewriteEngine on
+RewriteCond %{REQUEST_URI} !^/index.html$
+RewriteRule .*\.(php|html)$ /index.html [L,R=302]
+
+RewriteCond %{HTTP_HOST} ^domain\.tld [NC]
+RewriteRule ^(.*)$ http://www.domain.tld/$1 [L,R=301,NC]
+
+RewriteCond %{REQUEST_URI} !^/(index.html)?$
+RewriteCond %{REQUEST_URI} !.(gif|jpeg|jpg|png|css|js|txt)$
+RewriteRule .* / [L,R=302]
+
+SetEnvIfNoCase User-Agent .*rogerbot.* bad_bot
+SetEnvIfNoCase User-Agent .*exabot.* bad_bot
+SetEnvIfNoCase User-Agent .*mj12bot.* bad_bot
+SetEnvIfNoCase User-Agent .*dotbot.* bad_bot
+SetEnvIfNoCase User-Agent .*gigabot.* bad_bot
+SetEnvIfNoCase User-Agent .*ahrefsbot.* bad_bot
+SetEnvIfNoCase User-Agent .*sitebot.* bad_bot
+
+<Limit GET POST HEAD>
+Order Allow,Deny
+Allow from all
+Deny from env=bad_bot
+</Limit>
